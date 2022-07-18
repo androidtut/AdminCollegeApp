@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AdminCollegeApp">
         <activity
+            android:name=".PdfUploadActivity"
+            android:exported="false" />
+        <activity
             android:name=".UploadImageActivity"
             android:exported="false" />
         <activity

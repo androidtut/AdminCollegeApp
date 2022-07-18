@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-CardView uploadNotice,uploadimage;
+CardView uploadNotice,uploadimage,uploadebook;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,10 +16,12 @@ CardView uploadNotice,uploadimage;
         //find view with id
         uploadNotice = findViewById(R.id.uploadnotice);
         uploadimage = findViewById(R.id.uploadimage);
+        uploadebook = findViewById(R.id.uploadebook);
 
 //        set onclick listener to the view
         uploadNotice.setOnClickListener(this);
         uploadimage.setOnClickListener(this);
+        uploadebook.setOnClickListener(this);
 
     }
 
@@ -32,6 +34,9 @@ CardView uploadNotice,uploadimage;
                 break;
             case R.id.uploadimage:
                 startActivity(new Intent(MainActivity.this,UploadImageActivity.class));
+                break;
+            case R.id.uploadebook:
+                startActivity(new Intent(MainActivity.this,PdfUploadActivity.class));
                 break;
         }
     }
