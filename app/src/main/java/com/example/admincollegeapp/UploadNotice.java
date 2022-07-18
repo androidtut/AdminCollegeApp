@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -45,6 +47,7 @@ public class UploadNotice extends AppCompatActivity implements View.OnClickListe
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
     String downloadUrl = "";
+    ProgressDialog progressDialog;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -65,6 +68,11 @@ public class UploadNotice extends AppCompatActivity implements View.OnClickListe
         databaseReference = FirebaseDatabase.getInstance().getReference();
         storageReference = FirebaseStorage.getInstance().getReference();
         calendar = Calendar.getInstance();
+
+//      Progress dialog
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("uploading to database");
+        progressDialog.setMessage("Wait while Loading...");
 
 //      set onclick listener
         uploadnotice.setOnClickListener(v -> {
@@ -112,6 +120,7 @@ public class UploadNotice extends AppCompatActivity implements View.OnClickListe
 
     // method to upload data in firebase real time database
     private void uploaddata() {
+        progressDialog.show();
         DatabaseReference d1 = databaseReference.child("Notice");
 //      generate unique key
         final String uniquekeys = d1.push().getKey();
@@ -128,11 +137,13 @@ public class UploadNotice extends AppCompatActivity implements View.OnClickListe
         d1.child(uniquekeys).setValue(notice).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
+                progressDialog.dismiss();
                 Toast.makeText(UploadNotice.this, "data inserted successfully", Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
                 Toast.makeText(UploadNotice.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
