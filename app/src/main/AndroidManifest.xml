@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AdminCollegeApp">
         <activity
+            android:name=".Faculty.AddTeachersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Faculty.UpdateFacultyActivity"
+            android:exported="false" />
+        <activity
             android:name=".PdfUploadActivity"
             android:exported="false" />
         <activity
