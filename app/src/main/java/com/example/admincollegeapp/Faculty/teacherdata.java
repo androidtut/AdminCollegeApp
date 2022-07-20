@@ -12,6 +12,8 @@ public class teacherdata {
         this.image = image;
     }
 
+   public teacherdata(){}
+
     public String getName() {
         return name;
     }
