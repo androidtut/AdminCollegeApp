@@ -129,7 +129,6 @@ LinearLayout computerNodata,cNodata,c1Nodata,javaNodata;
 
     }
 
-
     //method to load c++ programming teacher from database
     private void Loadc1Programming() {
         DatabaseReference databaseReference3 = databaseReference.child("c++ programming");
